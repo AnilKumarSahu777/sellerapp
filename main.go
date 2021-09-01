@@ -30,7 +30,7 @@ type Body struct {
 }
 
 func homepage(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Welcome to the HomePage!")
+	// fmt.Fprint(w, "Welcome to the HomePage!")
 	var body URL
 	var dbpayload []Body
 	var tempDbpayload Body
@@ -90,13 +90,13 @@ func homepage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	fmt.Printf("Response Body from post sellerdb API %v \n", string(responseBody))
-
+	enc := json.NewEncoder(w)
+	enc.Encode(string(responseBody))
 }
 
 func handleRequests() {
 	// creates a new instance of a mux router
 	myRouter := mux.NewRouter()
-	// replace http.HandleFunc with myRouter.HandleFunc
 	myRouter.HandleFunc("/", homepage).Methods("POST")
 	log.Fatal(http.ListenAndServe(":10090", myRouter))
 }
