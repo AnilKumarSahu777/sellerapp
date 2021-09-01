@@ -30,7 +30,6 @@ type Body struct {
 }
 
 func homepage(w http.ResponseWriter, r *http.Request) {
-	// fmt.Fprint(w, "Welcome to the HomePage!")
 	var body URL
 	var dbpayload []Body
 	var tempDbpayload Body
